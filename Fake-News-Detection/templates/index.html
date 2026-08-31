@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fake News Detector</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 250px;
+            padding: 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            resize: vertical;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        textarea:focus {
+            border-color: #6366f1;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #3730a3;
+            transform: translateY(-2px);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .real {
+            background: #ecfdf5;
+            border: 2px solid #10b981;
+        }
+
+        .fake {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+        }
+
+        .result h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .real h2 {
+            color: #047857;
+        }
+
+        .fake h2 {
+            color: #dc2626;
+        }
+
+        .confidence {
+            font-size: 18px;
+            color: #475569;
+        }
+
+        .info {
+            margin-top: 30px;
+            padding: 18px;
+            background: #f8fafc;
+            border-radius: 10px;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 25px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            textarea {
+                min-height: 200px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>📰 Fake News Detector</h1>
+
+            <p>
+                AI-powered NLP system for detecting potentially fake or real news
+            </p>
+
+        </div>
+
+
+        <form method="POST">
+
+            <textarea
+                name="news_text"
+                placeholder="Paste a news headline or article here..."
+                required>{{ news_text }}</textarea>
+
+
+            <div class="button-container">
+
+                <button type="submit">
+                    🔍 Analyze News
+                </button>
+
+            </div>
+
+        </form>
+
+
+        {% if result %}
+
+        <div class="result {% if result == 'REAL' %}real{% else %}fake{% endif %}">
+
+            {% if result == "REAL" %}
+
+                <h2>✅ REAL NEWS</h2>
+
+            {% else %}
+
+                <h2>⚠️ FAKE NEWS</h2>
+
+            {% endif %}
+
+
+            <p class="confidence">
+
+                Model Confidence:
+                <strong>{{ "%.2f"|format(confidence) }}%</strong>
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="info">
+
+            <strong>How it works:</strong>
+
+            The system preprocesses the submitted news text,
+            converts it into TF-IDF features, and uses a trained
+            Linear SVM machine learning model to classify the text.
+
+            <br><br>
+
+            <strong>Note:</strong>
+
+            This system performs machine-learning based classification.
+            It does not independently verify news against live sources.
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

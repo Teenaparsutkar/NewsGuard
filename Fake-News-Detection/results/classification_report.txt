@@ -1,0 +1,16 @@
+Fake News Detection - Classification Report
+
+              precision    recall  f1-score   support
+
+        Fake       0.99      0.99      0.99      3580
+        Real       0.99      1.00      1.00      4186
+
+    accuracy                           0.99      7766
+   macro avg       0.99      0.99      0.99      7766
+weighted avg       0.99      0.99      0.99      7766
+
+Overall Metrics
+Accuracy : 0.9947
+Precision: 0.9945
+Recall   : 0.9957
+F1 Score : 0.9951

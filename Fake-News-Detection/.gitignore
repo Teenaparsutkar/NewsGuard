@@ -1,0 +1,10 @@
+# Python virtual environment
+venv/
+.venv/
+
+# Large datasets
+data/*.csv
+
+# Python cache
+__pycache__/
+*.pyc
